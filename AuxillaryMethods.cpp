@@ -32,24 +32,24 @@ string AuxillaryMethods::getNumber(string text, int charPosition)
 
 string AuxillaryMethods::loadLine()
 {
-    string entry = "";
-    getline(cin, entry);
+    string input = "";
+    getline(cin, input);
 
-    return entry;
+    return input;
 }
 
 char AuxillaryMethods::loadChar()
 {
-    string entry = "";
+    string input = "";
     char character  = {0};
 
     while (true)
     {
-        getline(cin, entry);
+        getline(cin, input);
 
-        if (entry.length() == 1)
+        if (input.length() == 1)
         {
-            character = entry[0];
+            character = input[0];
             break;
         }
         cout << "This is not a single character. Enter again." << endl;
@@ -69,15 +69,15 @@ string AuxillaryMethods::changeFirstLetterToUpperAndNextLettersToLower(string te
 
 int AuxillaryMethods::loadInteger()
 {
-    string entry = "";
+    string input = "";
     int number = 0;
 
     while (true)
     {
-        getline(cin, entry);
+        getline(cin, input);
 
-        stringstream myStream(entry);
-        if (myStream >> entry)
+        stringstream myStream(input);
+        if (myStream >> input)
             break;
         cout << "This is not a number. Enter again." << endl;
     }
