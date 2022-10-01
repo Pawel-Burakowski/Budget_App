@@ -6,10 +6,10 @@ char FinancialBook::chooseOptionFromMainMenu()
 
     system("cls");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
-    cout << "WELCOME TO THE BUDGET APP" << endl;
+    cout << "   WELCOME TO THE BUDGET APP" << endl;
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
     cout << endl;
-    cout << "    >>> MAIN  MENU <<<" << endl;
+    cout << "     >>> MAIN  MENU <<<" << endl;
     cout << "---------------------------" << endl;
     cout << "1. Registration" << endl;
     cout << "2. Login" << endl;
