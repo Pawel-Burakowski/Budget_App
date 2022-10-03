@@ -8,12 +8,12 @@ void User::setId(int newId)
         id = newId;
 }
 
-void setName(string newName)
+void User::setName(string newName)
 {
     name = newName;
 }
 
-void setSurname(string newSurname)
+void User::setSurname(string newSurname)
 {
     surname = newSurname;
 }
@@ -33,12 +33,12 @@ int User::getId()
     return id;
 }
 
-string getName()
+string User::getName()
 {
     return name;
 }
 
-string getSurname()
+string User::getSurname()
 {
     return surname;
 }

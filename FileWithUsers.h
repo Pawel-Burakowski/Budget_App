@@ -9,12 +9,12 @@
 #include "User.h"
 #include "AuxillaryMethods.h"
 #include "XmlFile.h"
+#include "Markup.h"
 
 using namespace std;
 
 class FileWithUsers : public XmlFile
 {
-
 public:
     FileWithUsers(string fileName) : XmlFile(fileName) {};
     void addUserToFile(User user);
