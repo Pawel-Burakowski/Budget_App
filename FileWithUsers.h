@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "User.h"
-#include "AuxillaryMethods.h"
 #include "XmlFile.h"
 #include "Markup.h"
 
@@ -18,7 +17,6 @@ public:
     void addUserToFile(User user);
     void addAllUsersToFile(vector <User> &users);
     vector <User> loadUsersFromFIle();
-
 };
 
 #endif
