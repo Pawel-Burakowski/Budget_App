@@ -9,9 +9,9 @@ string AuxillaryMethods::conversionFromIntToString(int number)
     return str;
 }
 
-int AuxillaryMethods::coversionFromStringToInt(string number)
+int AuxillaryMethods::coversionFromStringTofloat(string number)
 {
-    int numberInt;
+    float numberInt;
     istringstream iss(number);
     iss >> numberInt;
 
