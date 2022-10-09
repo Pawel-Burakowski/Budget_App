@@ -27,6 +27,7 @@ class BudgetManager
     void showDataOfExpense(Expense expense);
     void displayTheNumberOfSearchedIncomes(int numberOfIncomes);
     void displayTheNumberOfSearchedExpenses(int numberOfExpenses);
+    bool checkIfDateIsCorrect(string date);
     char chooseOptionFromIncomeMenu();
     char chooseOptionFromExpenseMenu();
 

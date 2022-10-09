@@ -124,3 +124,14 @@ string AuxillaryMethods::getTodaysDate()
     date = year + '-' + month + '-' + day ;
     return date;
 }
+
+string AuxillaryMethods::conversionDateFromStringToIntWithoutDash(string date)
+{
+    for(int i = 0; i <= date.length()-1; i++)
+    {
+        if(date[i] == '-')
+            date.replace(i,1,"");
+    }
+    int dateInt = conversionFromStringToInt(date);
+    return dateInt;
+}
