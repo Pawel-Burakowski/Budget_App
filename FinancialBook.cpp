@@ -36,15 +36,15 @@ int FinancialBook::userLoggingIn()
     userManager.userLoggingIn();
     if (userManager.checkIfUserIsLogged())
     {
-        financialManager = new FinancialManager(NAME_OF_FILE_WITH_INCOMES, NAME_OF_FILE_WITH_EXPENSES, userManager.getIdOfLoggedUser());
+        budgetManager = new budgetManager(NAME_OF_FILE_WITH_INCOMES, NAME_OF_FILE_WITH_EXPENSES, userManager.getIdOfLoggedUser());
     }
 }
 
 int FinancialBook::userLoggingOut()
 {
     userManager.userLoggingOut();
-    delete financialManager;
-    financialManager = NULL;
+    delete budgetManager;
+    budgetManager = NULL;
 }
 
 void FinancialBook::changePasswordOfLoggedUser()
@@ -60,4 +60,9 @@ void FinancialBook::showAllUsers()
 bool FinancialBook::checkIfUserIsLoged()
 {
     userManager.checkIfUserIsLogged();
+}
+
+int FinancialBook::addIncome()
+{
+    budgetManager -> addIncome();
 }

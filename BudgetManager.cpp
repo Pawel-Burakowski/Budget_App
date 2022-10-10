@@ -1,6 +1,6 @@
 #include "BudgetManager.h"
 
-void BudgetManager::addIncome()
+int BudgetManager::addIncome()
 {
     Income income;
 
@@ -12,59 +12,94 @@ void BudgetManager::addIncome()
         cout << " >>> ADDING NEW INCOME <<<" << endl << endl;
         choice = chooseOptionFromIncomeMenu();
 
-        switch (wybor)
+        switch (choice)
         {
         case '1':
-
+            income = setDataOfTodayIncome();
             break;
+
         case '2':
-
+            income = setDataOfAnotherDayIncome();
             break;
+
         case '3':
             return 0;
             break;
+
         default:
             cout << endl << "There is no option on the menu!" << endl << endl;
             break;
         }
     }
 
-    adresat = podajDaneNowegoAdresata();
-
-    adresaci.push_back(adresat);
-    if (plikZAdresatami.dopiszAdresataDoPliku(adresat))
-        cout << "Nowy adresat zostal dodany" << endl;
+    incomes.push_back(income);
+    if (fileWithIncomes.addIncomeToFile(income))
+        cout << "The new income has been added" << endl;
     else
-        cout << "Blad. Nie udalo sie dodac nowego adresata do pliku." << endl;
+        cout << "Error. It was not possible to add a new income to the file." << endl;
     system("pause");
+    return 0;
 }
 
-Income BudgetManager::setDataOfTodayIncome();
+Income BudgetManager::setDataOfTodayIncome()
 {
     Income income;
 
     string date, amount, description;
+    int dateInt;
     double amountDouble;
 
     income.setUserId(ID_OF_LOGGED_USER);
-    date = AuxillaryMethods::getTodaysDate;
+    date = AuxillaryMethods::getTodaysDate();
+    dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
     cout << "Give the amount of income: ";
-    mount = AuxillaryMethods::wczytajLinie();
+    amount = AuxillaryMethods::loadLine();
     amountDouble = AuxillaryMethods::conversionFromStringToDouble(amount);
 
     cout << "Write the description: ";
-    description = MetodyPomocnicze::wczytajLinie();
+    description = AuxillaryMethods::loadLine();
 
-    adresat.ustawImie(imie);
-    adresat.ustawNazwisko(nazwisko);
-    adresat.ustawNumerTelefonu((numerTelefonu));
-    adresat.ustawEmail(email);
-    adresat.ustawAdres(adres);
-
-    return adresat;
+    income.setStringDate(date);
+    income.setIntDate(dateInt);
+    income.setAmount(amountDouble);
+    income.setDescription((description));
+    return income;
 }
 
+Income BudgetManager::setDataOfAnotherDayIncome()
+{
+    Income income;
+
+    string date, amount, description;
+    int dateInt;
+    double amountDouble;
+
+    income.setUserId(ID_OF_LOGGED_USER);
+
+    cout << "Give the date in rrrr-mm-dd format: ";
+    date = AuxillaryMethods::loadLine();
+    while(checkIfDateIsCorrect(date) == false)
+    {
+        date = AuxillaryMethods::loadLine();
+    }
+    dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
+
+    cout << "Give the amount of income: ";
+    amount = AuxillaryMethods::loadLine();
+    amountDouble = AuxillaryMethods::conversionFromStringToDouble(amount);
+
+    cout << "Write the description: ";
+    description = AuxillaryMethods::loadLine();
+
+    income.setStringDate(date);
+    income.setIntDate(dateInt);
+    income.setAmount(amountDouble);
+    income.setDescription((description));
+
+    return income;
+}
+/*
 void BudgetManager::showBalanceFromTheCurrentMonth()
 {
     system("cls");
@@ -120,7 +155,7 @@ void BudgetManager::showDataOfExpense(Expense expense)
     cout << "Email:              " << adresat.pobierzEmail() << endl;
     cout << "Adres:              " << adresat.pobierzAdres() << endl;
 }
-
+*/
 bool BudgetManager::checkIfDateIsCorrect(string date)
 {
     for(int i = 0; i <= date.length()-1; i++)
@@ -136,9 +171,9 @@ bool BudgetManager::checkIfDateIsCorrect(string date)
         string year = date.substr(0,4);
         string month = date.substr(5,2);
         string day = date.substr(8,2);
-        int yearInt = conversionFromStringToInt(year);
-        int monthInt = conversionFromStringToInt(month);
-        int dayInt = conversionFromStringToInt(day);
+        int yearInt = AuxillaryMethods::conversionFromStringToInt(year);
+        int monthInt = AuxillaryMethods::conversionFromStringToInt(month);
+        int dayInt = AuxillaryMethods::conversionFromStringToInt(day);
         if (yearInt > 0 && monthInt > 0 && monthInt <= 12 && dayInt > 0 && dayInt <= 31)
         {
             cout << "The date entered correctly." << endl;
@@ -153,7 +188,7 @@ bool BudgetManager::checkIfDateIsCorrect(string date)
     else
     {
         cout << "Wrong date format. Enter the date again!" << endl;
-            return false;
+        return false;
     }
 }
 
