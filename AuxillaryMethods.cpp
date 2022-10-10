@@ -9,7 +9,7 @@ string AuxillaryMethods::conversionFromIntToString(int number)
     return str;
 }
 
-int AuxillaryMethods::coversionFromStringToInt(string number)
+int AuxillaryMethods::conversionFromStringToInt(string number)
 {
     int numberInt;
     istringstream iss(number);
@@ -125,7 +125,7 @@ string AuxillaryMethods::getTodaysDate()
     return date;
 }
 
-string AuxillaryMethods::conversionDateFromStringToIntWithoutDash(string date)
+int AuxillaryMethods::conversionDateFromStringToIntWithoutDash(string date)
 {
     for(int i = 0; i <= date.length()-1; i++)
     {
