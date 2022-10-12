@@ -23,6 +23,8 @@ class BudgetManager
 
     Income setDataOfTodayIncome();
     Income setDataOfAnotherDayIncome();
+    Expense setDataOfTodayExpense();
+    Expense setDataOfAnotherDayExpense();
     /*
     Expense setDataOfNewExpense();
     void showDataOfIncome(Income income);
@@ -42,7 +44,7 @@ public:
         expenses = fileWithExpenses.getExpensesOfLoggedUserFromFile(ID_OF_LOGGED_USER);
     };
     int addIncome();
-    void addExpense();
+    int addExpense();
     /*
     void showBalanceFromTheCurrentMonth();
     void showBalanceFromThePreviousMonth();

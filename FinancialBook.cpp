@@ -66,3 +66,8 @@ int FinancialBook::addIncome()
 {
     budgetManager -> addIncome();
 }
+
+int FinancialBook::addExpense()
+{
+    budgetManager -> addExpense();
+}
