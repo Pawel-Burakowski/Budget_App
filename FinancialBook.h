@@ -37,6 +37,7 @@ public:
     char chooseOptionFromUserMenu();
     bool checkIfUserIsLoged();
     int addIncome();
+    int addExpense();
 };
 
 #endif
