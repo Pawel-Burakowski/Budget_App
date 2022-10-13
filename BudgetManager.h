@@ -32,8 +32,8 @@ class BudgetManager
     void showDataOfIncome(Income income);
     void showDataOfExpense(Expense expense);
 
-    void displayTheNumberOfSearchedIncomesAndSum(int numberOfIncomes, int incomesSum);
-    void displayTheNumberOfSearchedExpensesAndSum(int numberOfExpenses, int expensesSum);
+    void displayTheNumberOfSearchedIncomesAndSum(int numberOfIncomes, double incomesSum);
+    void displayTheNumberOfSearchedExpensesAndSumAndTotalSum(int numberOfExpenses, double incomesSum, double expensesSum);
 
     bool checkIfDateIsCorrect(string date);
     char chooseOptionFromIncomeMenu();
@@ -51,9 +51,8 @@ public:
 
     void showBalanceFromTheCurrentMonth();
     void showBalanceFromThePreviousMonth();
-    /*
     void showBalanceFromTheSelectedPeriod();
-    */
+
 };
 
 #endif

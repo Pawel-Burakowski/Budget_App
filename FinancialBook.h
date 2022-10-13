@@ -40,6 +40,7 @@ public:
     int addExpense();
     void showBalanceFromTheCurrentMonth();
     void showBalanceFromThePreviousMonth();
+    void showBalanceFromTheSelectedPeriod();
 };
 
 #endif

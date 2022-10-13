@@ -348,7 +348,84 @@ void BudgetManager::showBalanceFromThePreviousMonth()
     system("pause");
 }
 
-void BudgetManager::displayTheNumberOfSearchedIncomesAndSum(int numberOfIncomes, int incomesSum)
+void FinancialManager::showBalanceFromTheSelectedPeriod()
+{
+    int numberOfIncomes = 0;
+    int numberOfExpenses = 0;
+    string firstDay, lastDay;
+    int firstDayInt, lastDayInt;
+    double incomesSum = 0;
+    double expensesSum = 0;
+
+    cout << "Give first day in rrrr-mm-dd format: ";
+    do
+    {
+        firstDay = AuxillaryMethods::loadLine();
+    }
+    while(checkIfDateIsCorrect(firstDay) == false);
+    firstDayInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(firstDay);
+
+    cout << "Give last day in rrrr-mm-dd format: ";
+    do
+    {
+        lastDay = AuxillaryMethods::loadLine();
+    }
+    while(checkIfDateIsCorrect(lastDay) == false);
+    lastDayInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(lastDay);
+
+    system("cls");
+    if (!incomes.empty())
+    {
+        sort(incomes.begin(), incomes.end(),greater<Income>());
+
+        cout << "             >>> INCOMES <<<" << endl;
+        cout << "-----------------------------------------------" << endl;
+        for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++)
+        {
+            string dateOfIncome = itr -> getStringDate();
+            int dateOfIncomeInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(dateOfIncome);
+            if ( dateOfIncomeInt >= firstDayInt && dateOfIncomeInt <= lastDayInt)
+            {
+                showDataOfIncome(*itr);
+                incomesSum = incomesSum + itr -> getAmount();
+                numberOfIncomes++;
+            }
+        }
+        displayTheNumberOfSearchedIncomesAndSum(numberOfIncomes, incomesSum);
+        cout << endl;
+    }
+    else
+    {
+        cout << endl << "There are no incomes in a selected period." << endl << endl;
+    }
+    if (!expenses.empty())
+    {
+        sort(expenses.begin(), expenses.end(),greater<Expense>());
+
+        cout << "             >>> EXPENSES <<<" << endl;
+        cout << "-----------------------------------------------" << endl;
+        for (vector <Expense> :: iterator itr = expenses.begin(); itr != expenses.end(); itr++)
+        {
+            string dateOfExpense = itr -> getStringDate();
+            int dateOfExpenseInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(dateOfExpense);
+            if ( dateOfExpenseInt >= firstDayInt && dateOfExpenseInt <= lastDayInt)
+            {
+                showDataOfExpense(*itr);
+                expensesSum = expensesSum + itr -> getAmount();
+                numberOfExpenses++;
+            }
+        }
+        displayTheNumberOfSearchedExpensesAndSumAndTotalSum(numberOfExpenses, incomesSum, expensesSum);
+    }
+    else
+    {
+        cout << endl << "There are no expenses in a selected period." << endl << endl;
+    }
+
+    system("pause");
+}
+
+void BudgetManager::displayTheNumberOfSearchedIncomesAndSum(int numberOfIncomes, double incomesSum)
 {
     if (numberOfIncomes == 0)
         cout << endl << "There are no incomes in a selected period." << endl;
@@ -357,26 +434,28 @@ void BudgetManager::displayTheNumberOfSearchedIncomesAndSum(int numberOfIncomes,
     cout << "The Sum of incomes: " << setprecision(15) << incomesSum << endl << endl;
 }
 
-void BudgetManager::displayTheNumberOfSearchedExpensesAndSum(int numberOfExpenses, int expensesSum)
+void BudgetManager::displayTheNumberOfSearchedExpensesAndSumAndTotalSum(int numberOfExpenses, double incomesSum, double expensesSum)
 {
     if (numberOfExpenses == 0)
         cout << endl << "There are no expenses in a selected period." << endl;
     else
         cout << endl << "The amount of expenses in a selected period is: " << numberOfExpenses << endl;
     cout << "The Sum of Expenses: " << setprecision(15) << expensesSum << endl << endl;
+    cout << "TOTAL INCOME IN THE SELECTED PERIOD: " << setprecision(15) << incomesSum + expensesSum;
+    cout << endl << endl;
 }
 
 void BudgetManager::showDataOfIncome(Income income)
 {
     cout << endl << "Date:                 " << income.getStringDate() << endl;
-    cout << "Amount:               " << setprecision(15) << income.getAmount() << endl;
+    cout << "Amount:                " << setprecision(15) << income.getAmount() << endl;
     cout << "Description:           " << income.getDescription() << endl;
 }
 
 void BudgetManager::showDataOfExpense(Expense expense)
 {
     cout << endl << "Date:                 " << expense.getStringDate() << endl;
-    cout << "Amount:               " << setprecision(15) << expense.getAmount() << endl;
+    cout << "Amount:                " << setprecision(15) << expense.getAmount() << endl;
     cout << "Description:           " << expense.getDescription() << endl;
 }
 
