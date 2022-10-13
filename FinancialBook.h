@@ -38,6 +38,8 @@ public:
     bool checkIfUserIsLoged();
     int addIncome();
     int addExpense();
+    void showBalanceFromTheCurrentMonth();
+    void showBalanceFromThePreviousMonth();
 };
 
 #endif
