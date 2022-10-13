@@ -15,9 +15,9 @@ bool FileWithIncomes::addIncomeToFile(Income income)
     xml.IntoElem();
     xml.AddElem("Income");
     xml.IntoElem();
-    xml.AddElem("Date", income.getStringDate());
     xml.AddElem("UserID", income.getUserId());
-    xml.AddElem("Amount", income.getAmount());
+    xml.AddElem("Date", income.getStringDate());
+    xml.AddElem("Amount", AuxillaryMethods::conversionFromDoubleToString(income.getAmount()));
     xml.AddElem("Description", income.getDescription());
 
     xml.Save( XML_FILE_NAME );
@@ -39,8 +39,8 @@ void FileWithIncomes::addAllIncomesToFile(vector <Income> &incomes)
     {
         xml.AddElem("Income");
         xml.IntoElem();
-        xml.AddElem("Date", itr -> getStringDate());
         xml.AddElem("UserID", itr -> getUserId());
+        xml.AddElem("Date", itr -> getStringDate());
         xml.AddElem("Amount", itr -> getAmount());
         xml.AddElem("Description", itr -> getDescription());
         xml.OutOfElem();
@@ -60,13 +60,13 @@ vector <Income> FileWithIncomes::getIncomesOfLoggedUserFromFile(int ID_OF_LOGGED
     while (xml.FindElem("Income"))
     {
         xml.IntoElem();
+        xml.FindElem( "UserID" );
+        income.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
         xml.FindElem("Date");
         income.setStringDate(xml.GetData());
         income.setIntDate(AuxillaryMethods::conversionDateFromStringToIntWithoutDash(income.getStringDate()));
-        xml.FindElem("UserID");
-        income.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
         xml.FindElem("Amount");
-        income.setAmount(atoi( MCD_2PCSZ(xml.GetData())));
+        income.setAmount(atof( MCD_2PCSZ(xml.GetData())));
         xml.FindElem("Description");
         income.setDescription(xml.GetData());
         xml.OutOfElem();

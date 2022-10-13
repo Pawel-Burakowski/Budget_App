@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <windows.h>
+#include <iomanip>.h
+#include <algorithm>
 
 #include "FileWithExpenses.h"
 #include "FileWithIncomes.h"
@@ -25,13 +27,14 @@ class BudgetManager
     Income setDataOfAnotherDayIncome();
     Expense setDataOfTodayExpense();
     Expense setDataOfAnotherDayExpense();
-    /*
-    Expense setDataOfNewExpense();
+
+
     void showDataOfIncome(Income income);
     void showDataOfExpense(Expense expense);
-    void displayTheNumberOfSearchedIncomes(int numberOfIncomes);
-    void displayTheNumberOfSearchedExpenses(int numberOfExpenses);
-    */
+
+    void displayTheNumberOfSearchedIncomesAndSum(int numberOfIncomes, int incomesSum);
+    void displayTheNumberOfSearchedExpensesAndSum(int numberOfExpenses, int expensesSum);
+
     bool checkIfDateIsCorrect(string date);
     char chooseOptionFromIncomeMenu();
     char chooseOptionFromExpenseMenu();
@@ -45,9 +48,10 @@ public:
     };
     int addIncome();
     int addExpense();
-    /*
+
     void showBalanceFromTheCurrentMonth();
     void showBalanceFromThePreviousMonth();
+    /*
     void showBalanceFromTheSelectedPeriod();
     */
 };
