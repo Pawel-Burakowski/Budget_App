@@ -36,6 +36,7 @@ class BudgetManager
     void displayTheNumberOfSearchedExpensesAndSumAndTotalSum(int numberOfExpenses, double incomesSum, double expensesSum);
 
     bool checkIfDateIsCorrect(string date);
+    int calculateTheNumberOfDaysInAMonth(int month, int year);
     char chooseOptionFromIncomeMenu();
     char chooseOptionFromExpenseMenu();
 

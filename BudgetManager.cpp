@@ -474,17 +474,25 @@ bool BudgetManager::checkIfDateIsCorrect(string date)
         string year = date.substr(0,4);
         string month = date.substr(5,2);
         string day = date.substr(8,2);
+        string todaysDate = AuxillaryMethods::getTodaysDate();
+        int todaysDateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(todaysDate);
+        int dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
         int yearInt = AuxillaryMethods::conversionFromStringToInt(year);
         int monthInt = AuxillaryMethods::conversionFromStringToInt(month);
         int dayInt = AuxillaryMethods::conversionFromStringToInt(day);
-        if (yearInt > 0 && monthInt > 0 && monthInt <= 12 && dayInt > 0 && dayInt <= 31)
+        if (dateInt > todaysDateInt)
+        {
+            cout << "You cannot enter a date later than today!" << endl;
+            return false;
+        }
+        if (yearInt > 0 && monthInt > 0 && monthInt <= 12 && dayInt > 0 && dayInt <= calculateTheNumberOfDaysInAMonth(monthInt, yearInt))
         {
             cout << "The date entered correctly." << endl;
             return true;
         }
         else
         {
-            cout << "bad date values. Enter the date again!" << endl;
+            cout << "Bad date values. Enter the date again!" << endl;
             return false;
         }
     }
@@ -493,6 +501,39 @@ bool BudgetManager::checkIfDateIsCorrect(string date)
         cout << "Wrong date format. Enter the date again!" << endl;
         return false;
     }
+}
+
+int FinancialManager::calculateTheNumberOfDaysInAMonth(int month, int year)
+{
+    switch(month)
+    {
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+        return 31;
+        break;
+
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        return 30;
+        break;
+
+    case 2:
+    {
+        if (((year%4 == 0) && (year%100 != 0)) || (year%400 == 0))
+            return 29;
+        else
+            return 28;
+    }
+    break;
+    }
+    return 0;
 }
 
 char BudgetManager::chooseOptionFromIncomeMenu()
