@@ -27,7 +27,8 @@ User UserManager::inputDataOfNewUser()
     {
         cout << "Enter login: ";
         user.setLogin(AuxillaryMethods::loadLine());
-    } while (checkIfLoginExist(user.getLogin()) == true);
+    }
+    while (checkIfLoginExist(user.getLogin()) == true);
 
     cout << "Enter password: ";
     user.setPassword(AuxillaryMethods::loadLine());
@@ -54,19 +55,6 @@ bool UserManager::checkIfLoginExist(string login)
         }
     }
     return false;
-}
-
-void UserManager::showAllUsers()
-{
-    for (unsigned int i = 0; i < users.size(); i++)
-    {
-        cout << users[i].getId() << endl;
-        cout << users[i].getName() << endl;
-        cout << users[i].getSurname() << endl;
-        cout << users[i].getLogin() << endl;
-        cout << users[i].getPassword() << endl;
-    }
-    system("pause");
 }
 
 int UserManager::userLoggingIn()

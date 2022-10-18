@@ -32,7 +32,6 @@ public:
     int userLoggingIn();
     int userLoggingOut();
     void changePasswordOfLoggedUser();
-    void showAllUsers();
     char chooseOptionFromMainMenu();
     char chooseOptionFromUserMenu();
     bool checkIfUserIsLoged();

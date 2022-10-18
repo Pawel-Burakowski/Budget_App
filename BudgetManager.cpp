@@ -58,11 +58,11 @@ Income BudgetManager::setDataOfTodayIncome()
     date = AuxillaryMethods::getTodaysDate();
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
-    cout << "Give the amount of income: ";
+    cout << "Enter the amount of income: ";
     amount = AuxillaryMethods::loadLine();
     amountDouble = AuxillaryMethods::conversionFromStringToDouble(amount);
 
-    cout << "Write the description: ";
+    cout << "Enter the description: ";
     description = AuxillaryMethods::loadLine();
 
     income.setStringDate(date);
@@ -82,7 +82,7 @@ Income BudgetManager::setDataOfAnotherDayIncome()
 
     income.setUserId(ID_OF_LOGGED_USER);
 
-    cout << "Give the date in rrrr-mm-dd format: ";
+    cout << "Enter the date in rrrr-mm-dd format: ";
     do
     {
         date = AuxillaryMethods::loadLine();
@@ -91,7 +91,7 @@ Income BudgetManager::setDataOfAnotherDayIncome()
 
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
-    cout << "Give the amount of income: ";
+    cout << "Enter the amount of income: ";
     amount = AuxillaryMethods::loadLine();
     amountDouble = AuxillaryMethods::conversionFromStringToDouble(amount);
 
@@ -164,7 +164,7 @@ Expense BudgetManager::setDataOfTodayExpense()
     date = AuxillaryMethods::getTodaysDate();
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
-    cout << "Give the amount of expense: ";
+    cout << "Enter the amount of expense: ";
     amount = AuxillaryMethods::loadLine();
     if(amount[0] != '-')
         amount = '-' + amount;
@@ -191,7 +191,7 @@ Expense BudgetManager::setDataOfAnotherDayExpense()
 
     expense.setUserId(ID_OF_LOGGED_USER);
 
-    cout << "Give the date in rrrr-mm-dd format: ";
+    cout << "Enter the date in rrrr-mm-dd format: ";
     do
     {
         date = AuxillaryMethods::loadLine();
@@ -200,7 +200,7 @@ Expense BudgetManager::setDataOfAnotherDayExpense()
 
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
-    cout << "Give the amount of expense: ";
+    cout << "Enter the amount of expense: ";
     amount = AuxillaryMethods::loadLine();
     if(amount[0] != '-')
         amount = '-' + amount;
@@ -357,7 +357,7 @@ void FinancialManager::showBalanceFromTheSelectedPeriod()
     double incomesSum = 0;
     double expensesSum = 0;
 
-    cout << "Give first day in rrrr-mm-dd format: ";
+    cout << "Enter first day in rrrr-mm-dd format: ";
     do
     {
         firstDay = AuxillaryMethods::loadLine();
@@ -365,7 +365,7 @@ void FinancialManager::showBalanceFromTheSelectedPeriod()
     while(checkIfDateIsCorrect(firstDay) == false);
     firstDayInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(firstDay);
 
-    cout << "Give last day in rrrr-mm-dd format: ";
+    cout << "Enter last day in rrrr-mm-dd format: ";
     do
     {
         lastDay = AuxillaryMethods::loadLine();
@@ -483,6 +483,11 @@ bool BudgetManager::checkIfDateIsCorrect(string date)
         if (dateInt > todaysDateInt)
         {
             cout << "You cannot enter a date later than today!" << endl;
+            return false;
+        }
+        if (dateInt < 20000101)
+        {
+            cout << "Please enter a date later than or equal to 2000-01-01!" << endl;
             return false;
         }
         if (yearInt > 0 && monthInt > 0 && monthInt <= 12 && dayInt > 0 && dayInt <= calculateTheNumberOfDaysInAMonth(monthInt, yearInt))

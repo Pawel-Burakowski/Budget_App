@@ -43,16 +43,15 @@ string AuxillaryMethods::conversionFromDoubleToString(double number)
     return str;
 }
 
-string AuxillaryMethods::getNumber(string text, int charPosition)
+int AuxillaryMethods::conversionDateFromStringToIntWithoutDash(string date)
 {
-    string number = "";
-    while(isdigit(text[charPosition]) == true)
+    for(int i = 0; i <= date.length()-1; i++)
     {
-        number += text[charPosition];
-        charPosition ++;
+        if(date[i] == '-')
+            date.replace(i,1,"");
     }
-
-    return number;
+    int dateInt = conversionFromStringToInt(date);
+    return dateInt;
 }
 
 string AuxillaryMethods::loadLine()
@@ -82,33 +81,6 @@ char AuxillaryMethods::loadChar()
     return character;
 }
 
-string AuxillaryMethods::changeFirstLetterToUpperAndNextLettersToLower(string text)
-{
-    if (!text.empty())
-    {
-        transform(text.begin(), text.end(), text.begin(), ::tolower);
-        text[0] = toupper(text[0]);
-    }
-    return text;
-}
-
-int AuxillaryMethods::loadInteger()
-{
-    string input = "";
-    int number = 0;
-
-    while (true)
-    {
-        getline(cin, input);
-
-        stringstream myStream(input);
-        if (myStream >> input)
-            break;
-        cout << "This is not a number. Enter again." << endl;
-    }
-    return number;
-}
-
 string AuxillaryMethods::getTodaysDate()
 {
     string date;
@@ -123,15 +95,4 @@ string AuxillaryMethods::getTodaysDate()
         day = '0' + day;
     date = year + '-' + month + '-' + day ;
     return date;
-}
-
-int AuxillaryMethods::conversionDateFromStringToIntWithoutDash(string date)
-{
-    for(int i = 0; i <= date.length()-1; i++)
-    {
-        if(date[i] == '-')
-            date.replace(i,1,"");
-    }
-    int dateInt = conversionFromStringToInt(date);
-    return dateInt;
 }
