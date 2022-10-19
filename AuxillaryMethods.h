@@ -1,17 +1,15 @@
 #ifndef AUXILLARYMETHODS_H
 #define AUXILLARYMETHODS_H
 
-#include <iostream>
+#include <bits/stdc++.h>
+/*#include <iostream>
 #include <windows.h>
 #include <sstream>
-#include <algorithm>
-#include <ctime>
-
+*/
 using namespace std;
 
 class AuxillaryMethods
 {
-
 public:
     static double conversionFromStringToDouble(string number);
     static string conversionFromDoubleToString(double number);
@@ -20,7 +18,6 @@ public:
     static int conversionDateFromStringToIntWithoutDash(string date);
     static string loadLine();
     static char loadChar();
-    static string getTodaysDate();
 };
 
 #endif

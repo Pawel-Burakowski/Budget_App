@@ -20,6 +20,10 @@ int AuxillaryMethods::conversionFromStringToInt(string number)
 
 double AuxillaryMethods::conversionFromStringToDouble(string number)
 {
+    if(number.length() == 0)
+    {
+        number = "0";
+    }
     for(int i = 0; i <= number.length()-1; i++)
     {
         if(number[i] == ',')
@@ -40,6 +44,7 @@ string AuxillaryMethods::conversionFromDoubleToString(double number)
     ss.precision(15);
     ss << number;
     string str = ss.str();
+
     return str;
 }
 
@@ -51,6 +56,7 @@ int AuxillaryMethods::conversionDateFromStringToIntWithoutDash(string date)
             date.replace(i,1,"");
     }
     int dateInt = conversionFromStringToInt(date);
+
     return dateInt;
 }
 
@@ -79,20 +85,4 @@ char AuxillaryMethods::loadChar()
         cout << "This is not a single character. Enter again." << endl;
     }
     return character;
-}
-
-string AuxillaryMethods::getTodaysDate()
-{
-    string date;
-    SYSTEMTIME st;
-    GetSystemTime(&st);
-    string year = conversionFromIntToString(st.wYear);
-    string month = conversionFromIntToString(st.wMonth);
-    if (month.length() == 1)
-        month = '0' + month;
-    string day = conversionFromIntToString(st.wDay);
-    if (day.length() == 1)
-        day = '0' + day;
-    date = year + '-' + month + '-' + day ;
-    return date;
 }

@@ -36,7 +36,7 @@ int FinancialBook::userLoggingIn()
     userManager.userLoggingIn();
     if (userManager.checkIfUserIsLogged())
     {
-        budgetManager = new budgetManager(NAME_OF_FILE_WITH_INCOMES, NAME_OF_FILE_WITH_EXPENSES, userManager.getIdOfLoggedUser());
+        budgetManager = new BudgetManager(NAME_OF_FILE_WITH_INCOMES, NAME_OF_FILE_WITH_EXPENSES, userManager.getIdOfLoggedUser());
     }
 }
 

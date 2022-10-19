@@ -23,7 +23,6 @@ int BudgetManager::addIncome()
                 cout << "Error. It was not possible to add a new income to the file." << endl;
             system("pause");
             break;
-
         case '2':
             income = setDataOfAnotherDayIncome();
             incomes.push_back(income);
@@ -33,11 +32,9 @@ int BudgetManager::addIncome()
                 cout << "Error. It was not possible to add a new income to the file." << endl;
             system("pause");
             break;
-
         case '3':
             return 0;
             break;
-
         default:
             cout << endl << "There is no option on the menu!" << endl << endl;
             break;
@@ -57,7 +54,7 @@ Income BudgetManager::setDataOfTodayIncome()
     income.setUserId(ID_OF_LOGGED_USER);
     income.setId(fileWithIncomes.getIdOfLastIncomeFromFile() + 1);
 
-    date = AuxillaryMethods::getTodaysDate();
+    date = dates.getTodaysDate();
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
     cout << "Enter the amount of income: ";
@@ -71,6 +68,7 @@ Income BudgetManager::setDataOfTodayIncome()
     income.setIntDate(dateInt);
     income.setAmount(amountDouble);
     income.setDescription((description));
+
     return income;
 }
 
@@ -86,12 +84,11 @@ Income BudgetManager::setDataOfAnotherDayIncome()
     income.setId(fileWithIncomes.getIdOfLastIncomeFromFile() + 1);
 
     cout << "Enter the date in rrrr-mm-dd format: ";
+
     do
     {
         date = AuxillaryMethods::loadLine();
-    }
-    while(checkIfDateIsCorrect(date) == false);
-
+    } while(dates.checkIfDateIsCorrect(date) == false);
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
     cout << "Enter the amount of income: ";
@@ -132,7 +129,6 @@ int BudgetManager::addExpense()
                 cout << "Error. It was not possible to add a new expense to the file." << endl;
             system("pause");
             break;
-
         case '2':
             expense = setDataOfAnotherDayExpense();
             expenses.push_back(expense);
@@ -142,11 +138,9 @@ int BudgetManager::addExpense()
                 cout << "Error. It was not possible to add a new expense to the file." << endl;
             system("pause");
             break;
-
         case '3':
             return 0;
             break;
-
         default:
             cout << endl << "There is no option on the menu!" << endl << endl;
             break;
@@ -166,7 +160,7 @@ Expense BudgetManager::setDataOfTodayExpense()
     expense.setUserId(ID_OF_LOGGED_USER);
     expense.setId(fileWithExpenses.getIdOfLastExpenseFromFile() + 1);
 
-    date = AuxillaryMethods::getTodaysDate();
+    date = dates.getTodaysDate();
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
     cout << "Enter the amount of expense: ";
@@ -175,7 +169,7 @@ Expense BudgetManager::setDataOfTodayExpense()
         amount = '-' + amount;
     amountDouble = AuxillaryMethods::conversionFromStringToDouble(amount);
 
-    cout << "Write the description: ";
+    cout << "Enter the description: ";
     description = AuxillaryMethods::loadLine();
 
     expense.setStringDate(date);
@@ -201,9 +195,7 @@ Expense BudgetManager::setDataOfAnotherDayExpense()
     do
     {
         date = AuxillaryMethods::loadLine();
-    }
-    while(checkIfDateIsCorrect(date) == false);
-
+    } while(dates.checkIfDateIsCorrect(date) == false);
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
     cout << "Enter the amount of expense: ";
@@ -354,7 +346,7 @@ void BudgetManager::showBalanceFromThePreviousMonth()
     system("pause");
 }
 
-void FinancialManager::showBalanceFromTheSelectedPeriod()
+void BudgetManager::showBalanceFromTheSelectedPeriod()
 {
     int numberOfIncomes = 0;
     int numberOfExpenses = 0;
@@ -367,16 +359,14 @@ void FinancialManager::showBalanceFromTheSelectedPeriod()
     do
     {
         firstDay = AuxillaryMethods::loadLine();
-    }
-    while(checkIfDateIsCorrect(firstDay) == false);
+    } while(dates.checkIfDateIsCorrect(firstDay) == false);
     firstDayInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(firstDay);
 
     cout << "Enter last day in rrrr-mm-dd format: ";
     do
     {
         lastDay = AuxillaryMethods::loadLine();
-    }
-    while(checkIfDateIsCorrect(lastDay) == false);
+    } while(dates.checkIfDateIsCorrect(lastDay) == false);
     lastDayInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(lastDay);
 
     system("cls");
@@ -448,105 +438,23 @@ void BudgetManager::displayTheNumberOfSearchedExpensesAndSumAndTotalSum(int numb
         cout << endl << "The amount of expenses in a selected period is: " << numberOfExpenses << endl;
     cout << "The Sum of Expenses: " << setprecision(15) << expensesSum << endl << endl;
     cout << "TOTAL INCOME IN THE SELECTED PERIOD: " << setprecision(15) << incomesSum + expensesSum;
-    cout << endl << endl;
+        cout << endl << endl;
 }
 
 void BudgetManager::showDataOfIncome(Income income)
 {
     cout << endl << "IncomeID:                 " << income.getId() << endl;
     cout << "Date:                 " << income.getStringDate() << endl;
-    cout << "Amount:                " << setprecision(15) << income.getAmount() << endl;
-    cout << "Description:           " << income.getDescription() << endl;
+    cout << "Amount:               " << setprecision(15) << income.getAmount() << endl;
+    cout << "Description:          " << income.getDescription() << endl;
 }
 
 void BudgetManager::showDataOfExpense(Expense expense)
 {
     cout << endl << "ExpenseID:                 " << expense.getId() << endl;
     cout << "Date:                 " << expense.getStringDate() << endl;
-    cout << "Amount:                " << setprecision(15) << expense.getAmount() << endl;
-    cout << "Description:           " << expense.getDescription() << endl;
-}
-
-bool BudgetManager::checkIfDateIsCorrect(string date)
-{
-    for(int i = 0; i <= date.length()-1; i++)
-    {
-        if((date[i] < 48 || date[i] > 57) && date[i] != '-')
-        {
-            cout << "Wrong date format. Enter the date again!" << endl;
-            return false;
-        }
-    }
-    if( date.length() == 10 && date[4] == '-' && date[7] == '-' )
-    {
-        string year = date.substr(0,4);
-        string month = date.substr(5,2);
-        string day = date.substr(8,2);
-        string todaysDate = AuxillaryMethods::getTodaysDate();
-        int todaysDateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(todaysDate);
-        int dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
-        int yearInt = AuxillaryMethods::conversionFromStringToInt(year);
-        int monthInt = AuxillaryMethods::conversionFromStringToInt(month);
-        int dayInt = AuxillaryMethods::conversionFromStringToInt(day);
-        if (dateInt > todaysDateInt)
-        {
-            cout << "You cannot enter a date later than today!" << endl;
-            return false;
-        }
-        if (dateInt < 20000101)
-        {
-            cout << "Please enter a date later than or equal to 2000-01-01!" << endl;
-            return false;
-        }
-        if (yearInt > 0 && monthInt > 0 && monthInt <= 12 && dayInt > 0 && dayInt <= calculateTheNumberOfDaysInAMonth(monthInt, yearInt))
-        {
-            cout << "The date entered correctly." << endl;
-            return true;
-        }
-        else
-        {
-            cout << "Bad date values. Enter the date again!" << endl;
-            return false;
-        }
-    }
-    else
-    {
-        cout << "Wrong date format. Enter the date again!" << endl;
-        return false;
-    }
-}
-
-int FinancialManager::calculateTheNumberOfDaysInAMonth(int month, int year)
-{
-    switch(month)
-    {
-    case 1:
-    case 3:
-    case 5:
-    case 7:
-    case 8:
-    case 10:
-    case 12:
-        return 31;
-        break;
-
-    case 4:
-    case 6:
-    case 9:
-    case 11:
-        return 30;
-        break;
-
-    case 2:
-    {
-        if (((year%4 == 0) && (year%100 != 0)) || (year%400 == 0))
-            return 29;
-        else
-            return 28;
-    }
-    break;
-    }
-    return 0;
+    cout << "Amount:               " << setprecision(15) << expense.getAmount() << endl;
+    cout << "Description:          " << expense.getDescription() << endl;
 }
 
 char BudgetManager::chooseOptionFromIncomeMenu()

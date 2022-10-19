@@ -22,8 +22,7 @@ class UserManager
     bool checkIfLoginExist(string login);
 
 public:
-    UserManager(string nameOfFileWithUsers) : fileWithUsers(nameOfFileWithUsers)
-    {
+    UserManager(string nameOfFileWithUsers) : fileWithUsers(nameOfFileWithUsers){
         idOfLoggedUser = 0;
         users = fileWithUsers.loadUsersFromFile();
     };

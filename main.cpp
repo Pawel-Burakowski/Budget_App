@@ -12,7 +12,7 @@ int main()
 
     while (true)
     {
-        if (financialBook.checkIfUserIsLogged() == false)
+        if (financialBook.checkIfUserIsLoged() == false)
         {
             choice = financialBook.chooseOptionFromMainMenu();
 
