@@ -1,12 +1,13 @@
 #ifndef BUDGETMANAGER_H
 #define BUDGETMANAGER_H
 
-#include <iostream>
+#include <bits/stdc++.h>
+/*#include <iostream>
 #include <vector>
 #include <windows.h>
 #include <iomanip>
 #include <algorithm>
-
+*/
 #include "FileWithExpenses.h"
 #include "FileWithIncomes.h"
 #include "Income.h"
@@ -53,7 +54,6 @@ public:
     void showBalanceFromTheCurrentMonth();
     void showBalanceFromThePreviousMonth();
     void showBalanceFromTheSelectedPeriod();
-
 };
 
 #endif

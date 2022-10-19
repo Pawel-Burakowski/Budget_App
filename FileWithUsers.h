@@ -1,9 +1,10 @@
 #ifndef FILEWITHUSERS_H
 #define FILEWITHUSERS_H
 
-#include <iostream>
+#include <bits/stdc++.h>
+/*#include <iostream>
 #include <vector>
-
+*/
 #include "User.h"
 #include "XmlFile.h"
 #include "Markup.h"
@@ -14,11 +15,10 @@ class FileWithUsers : public XmlFile
 {
 
 public:
-    FileWithUsers(string fileName) : XmlFile(fileName){};
+    FileWithUsers(string fileName) : XmlFile(fileName) {};
     void addUserToFile(User user);
     void addAllUsersToFile(vector <User> &users);
     vector <User> loadUsersFromFile();
-
 };
 
 #endif

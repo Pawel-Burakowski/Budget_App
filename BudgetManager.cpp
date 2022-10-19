@@ -23,6 +23,7 @@ int BudgetManager::addIncome()
                 cout << "Error. It was not possible to add a new income to the file." << endl;
             system("pause");
             break;
+
         case '2':
             income = setDataOfAnotherDayIncome();
             incomes.push_back(income);
@@ -32,9 +33,11 @@ int BudgetManager::addIncome()
                 cout << "Error. It was not possible to add a new income to the file." << endl;
             system("pause");
             break;
+
         case '3':
             return 0;
             break;
+
         default:
             cout << endl << "There is no option on the menu!" << endl << endl;
             break;
@@ -88,7 +91,8 @@ Income BudgetManager::setDataOfAnotherDayIncome()
     do
     {
         date = AuxillaryMethods::loadLine();
-    } while(dates.checkIfDateIsCorrect(date) == false);
+    }
+    while(dates.checkIfDateIsCorrect(date) == false);
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
     cout << "Enter the amount of income: ";
@@ -129,6 +133,7 @@ int BudgetManager::addExpense()
                 cout << "Error. It was not possible to add a new expense to the file." << endl;
             system("pause");
             break;
+
         case '2':
             expense = setDataOfAnotherDayExpense();
             expenses.push_back(expense);
@@ -138,9 +143,11 @@ int BudgetManager::addExpense()
                 cout << "Error. It was not possible to add a new expense to the file." << endl;
             system("pause");
             break;
+
         case '3':
             return 0;
             break;
+
         default:
             cout << endl << "There is no option on the menu!" << endl << endl;
             break;
@@ -195,7 +202,8 @@ Expense BudgetManager::setDataOfAnotherDayExpense()
     do
     {
         date = AuxillaryMethods::loadLine();
-    } while(dates.checkIfDateIsCorrect(date) == false);
+    }
+    while(dates.checkIfDateIsCorrect(date) == false);
     dateInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(date);
 
     cout << "Enter the amount of expense: ";
@@ -275,7 +283,6 @@ void BudgetManager::showBalanceFromTheCurrentMonth()
     {
         cout << endl << "There are no expenses in a selected period." << endl << endl;
     }
-
     system("pause");
 }
 
@@ -342,7 +349,6 @@ void BudgetManager::showBalanceFromThePreviousMonth()
     {
         cout << endl << "There are no expenses in a selected period." << endl << endl;
     }
-
     system("pause");
 }
 
@@ -359,14 +365,16 @@ void BudgetManager::showBalanceFromTheSelectedPeriod()
     do
     {
         firstDay = AuxillaryMethods::loadLine();
-    } while(dates.checkIfDateIsCorrect(firstDay) == false);
+    }
+    while(dates.checkIfDateIsCorrect(firstDay) == false);
     firstDayInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(firstDay);
 
     cout << "Enter last day in rrrr-mm-dd format: ";
     do
     {
         lastDay = AuxillaryMethods::loadLine();
-    } while(dates.checkIfDateIsCorrect(lastDay) == false);
+    }
+    while(dates.checkIfDateIsCorrect(lastDay) == false);
     lastDayInt = AuxillaryMethods::conversionDateFromStringToIntWithoutDash(lastDay);
 
     system("cls");
@@ -417,7 +425,6 @@ void BudgetManager::showBalanceFromTheSelectedPeriod()
     {
         cout << endl << "There are no expenses in a selected period." << endl << endl;
     }
-
     system("pause");
 }
 
@@ -438,7 +445,7 @@ void BudgetManager::displayTheNumberOfSearchedExpensesAndSumAndTotalSum(int numb
         cout << endl << "The amount of expenses in a selected period is: " << numberOfExpenses << endl;
     cout << "The Sum of Expenses: " << setprecision(15) << expensesSum << endl << endl;
     cout << "TOTAL INCOME IN THE SELECTED PERIOD: " << setprecision(15) << incomesSum + expensesSum;
-        cout << endl << endl;
+    cout << endl << endl;
 }
 
 void BudgetManager::showDataOfIncome(Income income)

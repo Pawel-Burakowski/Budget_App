@@ -1,9 +1,10 @@
 #ifndef FILEWITHINCOMES_H
 #define FILEWITHINCOMES_H
 
-#include <iostream>
+#include <bits/stdc++.h>
+/*#include <iostream>
 #include <vector>
-
+*/
 #include "Income.h"
 #include "XmlFile.h"
 #include "Markup.h"

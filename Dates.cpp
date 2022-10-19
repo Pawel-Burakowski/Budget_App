@@ -63,7 +63,7 @@ bool Dates::checkIfDateIsCorrect(string date)
     else
     {
         cout << "Wrong date format. Enter the date again!" << endl;
-            return false;
+        return false;
     }
 }
 

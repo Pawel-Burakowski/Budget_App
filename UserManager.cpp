@@ -27,7 +27,8 @@ User UserManager::inputDataOfNewUser()
     {
         cout << "Enter login: ";
         user.setLogin(AuxillaryMethods::loadLine());
-    } while (checkIfLoginExist(user.getLogin()) == true);
+    }
+    while (checkIfLoginExist(user.getLogin()) == true);
 
     cout << "Enter password: ";
     user.setPassword(AuxillaryMethods::loadLine());

@@ -37,7 +37,7 @@ vector <Income> FileWithIncomes::getIncomesOfLoggedUserFromFile(int ID_OF_LOGGED
     while (xml.FindElem("Income"))
     {
         xml.IntoElem();
-        xml.FindElem( "IncomeID" );
+        xml.FindElem("IncomeID");
         income.setId(atoi( MCD_2PCSZ(xml.GetData())));
         xml.FindElem( "UserID" );
         income.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
@@ -71,7 +71,7 @@ int FileWithIncomes::getIdOfLastIncomeFromFile()
         while ( xml.FindElem("Income") )
         {
             xml.IntoElem();
-            xml.FindElem( "IncomeID" );
+            xml.FindElem("IncomeID");
             idOfLastIncome = atoi( MCD_2PCSZ(xml.GetData()));
             xml.OutOfElem();
         }
